@@ -42,8 +42,14 @@ client.on('messageCreate', async message => {
     const command = args.shift().toLowerCase();
 
     switch (command) {
-        case 'padde':
-            client.commands.get('padde').execute(message, args)
+        case 'facebook':
+            client.commands.get('facebook').execute(message, args)
+            break
+        case 'instagram':
+            client.commands.get('instagram').execute(message, args)
+            break
+        case 'discord':
+            client.commands.get('discord').execute(message, args)
             break
         case 'bible':
             client.commands.get('bible').execute(message, args)
