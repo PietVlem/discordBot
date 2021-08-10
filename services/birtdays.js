@@ -34,7 +34,7 @@ exports.checkBirthdays = (discordClient) => {
 
         const options = {
             spreadsheetId: process.env.MEMBERLIST_SPREADSHEET_ID,
-            range: 'A4:h64'
+            range: 'A4:h63'
         }
 
         let res = await gsapi.spreadsheets.values.get(options)
