@@ -66,8 +66,5 @@ discordClient.on('guildMemberAdd', (guildMember) => {
     guildMember.roles.add(role);
 });
 
-/*birthdaybot*/
-
-
 /*Login into the discordClient*/
 discordClient.login(process.env.TOKEN);

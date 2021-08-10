@@ -9,7 +9,7 @@ module.exports = {
     execute(discordClient) {
         console.log("👉", 'Discord bot is Ready!');
 
-        /*Cronjob with the birtdaybot*/
+        /*Birthday announcer*/
         cron.schedule('0 0 * * *', () => {
             console.log('Running a job at 00:00 at Europe/Amsterdam timezone');
             birthdayService.checkBirthdays(discordClient)

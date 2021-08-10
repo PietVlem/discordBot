@@ -37,8 +37,11 @@ exports.checkBirthdays = (discordClient) => {
             range: 'A4:h63'
         }
 
+        /*Save the response into a var*/
         let res = await gsapi.spreadsheets.values.get(options)
+        /*Get today's date*/
         const now = dayjs().format("MM/DD")
+        /*Get the channel for the announcement*/
         const birthdayChannel = await discordClient.channels.cache.find(i => i.name === 'chit-chat')
 
         /*Loop through the data and check if its anyone's birthday today*/
@@ -46,10 +49,10 @@ exports.checkBirthdays = (discordClient) => {
             const person = res.data.values[i]
             const birthday = dayjs(person[5], "MM/DD/YYYY").format("MM/DD")
 
+            /*If it's someone's birthday today, send a message in the chit-chat channel*/
             if (now === birthday) {
-                console.log("👉", `${person[0]} is jarig vandaag! Wens hem/haar een gelukkige verjaardag!`)
                 const message = await birthdayChannel.send(`${person[0]} is jarig vandaag! Wens hem/haar een gelukkige verjaardag! 🎂🎉`)
-                message.react('🥳')
+                await message.react('🥳')
             }
         }
     }
