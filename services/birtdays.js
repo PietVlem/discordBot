@@ -10,9 +10,9 @@ exports.checkBirthdays = (discordClient) => {
 
     /*Create new google instance*/
     const googleClient = new google.auth.JWT(
-        keys.client_email,
+        process.env.GOOGLE_API_CLIENT_EMAIL,
         null,
-        keys.private_key,
+        process.env.GOOGLE_API_PRIVATE_KEY,
         [
             'https://www.googleapis.com/auth/spreadsheets.readonly'
         ]
