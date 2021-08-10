@@ -2,9 +2,6 @@ require('dotenv').config()
 const {google} = require('googleapis')
 const dayjs = require('dayjs')
 
-/*google api keys*/
-const keys = require('../googlekeys.json')
-
 exports.checkBirthdays = (discordClient) => {
     console.log("👉", 'Checking birthdays...')
 
