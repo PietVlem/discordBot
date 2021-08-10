@@ -25,14 +25,14 @@ for (const file of eventFiles) {
 /*Discord commands*/
 const prefix = "?"
 
-client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+client.commands = new Collection()
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
 
 for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
+    const command = require(`./commands/${file}`)
     // set a new item in the Collection
     // with the key as the command name and the value as the exported module
-    client.commands.set(command.name, command);
+    client.commands.set(command.name, command)
 }
 
 client.on('messageCreate', async message => {
@@ -56,6 +56,13 @@ client.on('messageCreate', async message => {
             break
     }
 })
+
+/*Add role when someone joins the serve*/
+client.on('guildMemberAdd', (guildMember) => {
+    const myGuild = client.guilds.cache.get('539096504237817866')
+    const role = myGuild.roles.cache.find(role => role.name === 'Social')
+    guildMember.roles.add(role);
+});
 
 /*Login into the client*/
 client.login(process.env.TOKEN);
