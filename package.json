@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/PietVlem/discordBot.git"
   },
-  "author": "",
+  "author": "Pieter Vleminckx",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/PietVlem/discordBot/issues"
