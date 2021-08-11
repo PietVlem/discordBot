@@ -45,23 +45,23 @@ discordClient.on('messageCreate', async message => {
 
     switch (command) {
         case 'facebook':
-            discordClient.commands.get('facebook').execute(message, args)
+            discordClient.commands.get('facebook').execute(message)
             break
         case 'instagram':
-            discordClient.commands.get('instagram').execute(message, args)
+            discordClient.commands.get('instagram').execute(message)
             break
         case 'discord':
-            discordClient.commands.get('discord').execute(message, args)
+            discordClient.commands.get('discord').execute(message)
             break
         case 'bible':
-            discordClient.commands.get('bible').execute(message, args)
+            discordClient.commands.get('bible').execute(message)
             break
         case 'poll':
             discordClient.commands.get('poll').execute(message, args)
             break
-        /*case 'adPoll':
-            discordClient.commands.get('adPoll').execute(message, args)
-            break*/
+        case 'custom-poll':
+            discordClient.commands.get('custom-poll').execute(message)
+            break
     }
 })
 

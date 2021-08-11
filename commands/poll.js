@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     name: 'poll',
-    description: 'Maakt een poll.',
+    description: 'Maak een poll.',
     async execute(message, args) {
         let pollDescription = args.slice(0).join(' ')
 
