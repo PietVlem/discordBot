@@ -9,9 +9,9 @@ Created a bot for some automation in our discord server!
 
 ### Commands
 #### Socials
-💻 `?instagram` : Gives you a link to our Instagram page <br>
 💻 `?discord` : Gives you a link to our discord server <br>
-💻 `?facebook` : Gives you a link to our facebook server <br>
+💻 `?facebook` : Gives you a link to our facebook page <br>
+💻 `?instagram` : Gives you a link to our Instagram page <br>
 
 #### Polls
 💻 `?poll [question]` : Creates a simple  👍 - 👎 poll <br>
