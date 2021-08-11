@@ -25,7 +25,7 @@ module.exports = {
             .setTitle(`📋 ${question}️`)
             .setDescription(pollDescription)
             .setColor('GREEN')
-        let msgEmbed = await message.channel.send(({ embeds: [embedPoll] }))
+        let msgEmbed = await message.channel.send({ embeds: [embedPoll] })
         for (let i = 0; i < pollValues.length; i++) {
             await msgEmbed.react(emojis[i])
         }
