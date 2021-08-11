@@ -15,7 +15,7 @@ Created a bot for some automation in our discord server!
 
 #### Polls
 💻 `?poll [question]` : Creates a simple  👍 - 👎 poll <br>
-💻 `?custom-poll "[question]" "option 1" "option 2" "option 3"` : Creates a custom poll up to 9 options <br>
+💻 `?custom-poll "[question]" "[option 1]" "[option 2]" "[option 3]"` : Creates a custom poll up to 9 options <br>
 
 #### Other
 💻 `?bible` : Gives you a link to our rules
