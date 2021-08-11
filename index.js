@@ -57,8 +57,11 @@ discordClient.on('messageCreate', async message => {
             discordClient.commands.get('bible').execute(message, args)
             break
         case 'poll':
-            discordClient.commands.get('poll').execute(message, args, discordClient)
+            discordClient.commands.get('poll').execute(message, args)
             break
+        /*case 'adPoll':
+            discordClient.commands.get('adPoll').execute(message, args)
+            break*/
     }
 })
 

@@ -10,9 +10,8 @@ module.exports = {
             .setTitle('📋 Poll!️')
             .setDescription(pollDescription)
             .setColor('GREEN')
-        let msgEmbed = await message.channel.send(({ embeds: [embedPoll] }))
-        await msgEmbed.react('👍')
-        await msgEmbed.react('👎')
+        await embedPoll.react('👍')
+        await embedPoll.react('👎')
         await message.delete().catch(console.error)
     },
 };
