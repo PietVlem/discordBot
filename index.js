@@ -56,6 +56,9 @@ discordClient.on('messageCreate', async message => {
         case 'bible':
             discordClient.commands.get('bible').execute(message, args)
             break
+        case 'poll':
+            discordClient.commands.get('poll').execute(message, args, discordClient)
+            break
     }
 })
 
