@@ -1,7 +1,8 @@
 const cron = require('node-cron')
 
 /*import services*/
-const birthdayService = require('../services/birtdays')
+const googleService = require('../services/google')
+const notionService = require('../services/notion')
 
 module.exports = {
     name: 'ready',
@@ -12,7 +13,7 @@ module.exports = {
         /*Birthday announcer*/
         cron.schedule('0 0 * * *', () => {
             console.log('Running a job at 00:00 at Europe/Amsterdam timezone');
-            birthdayService.checkBirthdays(discordClient)
+            googleService.checkBirthdays(discordClient)
         }, {
             scheduled: true,
             timezone: "Europe/Amsterdam"

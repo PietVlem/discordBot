@@ -7,7 +7,8 @@ require('dotenv').config()
 const fs = require('fs')
 const {Client, Collection, Intents} = require('discord.js')
 
-
+/*Services*/
+const notionService = require('./services/notion')
 
 /*Create discord cleint instance*/
 const discordClient = new Client({intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]})
@@ -65,11 +66,16 @@ discordClient.on('messageCreate', async message => {
     }
 })
 
-/*Add role when someone joins the serve*/
-discordClient.on('guildMemberAdd', (guildMember) => {
-    const myGuild = discordClient.guilds.cache.get('539096504237817866')
-    const role = myGuild.roles.cache.find(role => role.name === 'Social')
-    guildMember.roles.add(role);
+/*Do stuff when someone joins the serve*/
+discordClient.on('guildMemberAdd', async (guildMember) => {
+    /*Add role when someone joins the serve*/
+    const myGuild = await discordClient.guilds.cache.get('539096504237817866')
+    const role = await myGuild.roles.cache.find(role => role.name === 'Social')
+    await guildMember.roles.add(role);
+
+    /*Send him a message to welcome him to the community*/
+    /*const privateMsg = notionService.getWelcomeMessage()
+    console.log("👉", privateMsg)*/
 });
 
 /*Login into the discordClient*/
