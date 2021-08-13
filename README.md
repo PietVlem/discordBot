@@ -20,7 +20,8 @@ Created a bot for some automation in our discord server!
 📋 `?custom-poll "[question]" "[option 1]" "[option 2]" "[option 3]"` : Creates a custom poll up to 9 options <br>
 
 #### Admin
-👋️ `?new-member [user] [user]` : Creates an new member in out discord (role updates + private msg + announcement member channel)
+👋️ `?new-member [user] [user]` : Creates an new member in out discord (role updates + private msg + announcement member channel) <br>
+️👋️ `?remove-member [user] [user]` : Removes all roles from a user and adds 'Oud lid'-role to them
 
 #### Other
 📖 `?bible` : Gives you a link to our rules
