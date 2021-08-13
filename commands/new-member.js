@@ -15,12 +15,13 @@ module.exports = {
 
             /*Adding 'lid'/'nieuw lid' roles to and removing 'Social' role from the user*/
             message.mentions.members.forEach(member => {
-                /*Adding 'lid' and 'nieuw lid' roles to all mentions*/
                 member.roles.add(memberRole).catch(e => console.error(e));
                 member.roles.add(newMemberRole).catch(e => console.error(e));
                 member.roles.remove(socialRole).catch(e => console.error(e));
             });
 
+            /*Creating a new loop over the arguments because you cant have an async function in a foreach*/
+            /*Also I'm too stupid to add user roles to args so i use the mention members function for that*/
             for (let i = 0; i < args.length; i++) {
                 if (args[i].startsWith('<@') && args[i].endsWith('>')) {
                     /*Get user object*/
