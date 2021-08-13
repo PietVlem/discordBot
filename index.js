@@ -11,7 +11,14 @@ const {Client, Collection, Intents} = require('discord.js')
 const notionService = require('./services/notion')
 
 /*Create discord cleint instance*/
-const discordClient = new Client({intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]})
+const discordClient = new Client(
+    {
+        intents: [
+            Intents.FLAGS.GUILDS,
+            Intents.FLAGS.GUILD_MESSAGES,
+            Intents.FLAGS.GUILD_MEMBERS
+        ]
+    })
 
 /*Discord events*/
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'))
@@ -63,19 +70,24 @@ discordClient.on('messageCreate', async message => {
         case 'custom-poll':
             discordClient.commands.get('custom-poll').execute(message)
             break
+        /*case 'check-birthdays':
+            discordClient.commands.get('check-birthdays').execute(discordClient)
+            break*/
     }
 })
 
 /*Do stuff when someone joins the serve*/
 discordClient.on('guildMemberAdd', async (guildMember) => {
+    console.log("👉", 'member joined the server...')
+    
     /*Add role when someone joins the serve*/
-    const myGuild = await discordClient.guilds.cache.get('539096504237817866')
-    const role = await myGuild.roles.cache.find(role => role.name === 'Social')
+    const guild = guildMember.guild;
+    const role = await guild.roles.cache.find(role => role.name === 'Social')
     await guildMember.roles.add(role);
 
     /*Send him a message to welcome him to the community*/
-    /*const privateMsg = notionService.getWelcomeMessage()
-    console.log("👉", privateMsg)*/
+    const privateMsg = notionService.getWelcomeMessage()
+    await guildMember.send(await privateMsg)
 });
 
 /*Login into the discordClient*/

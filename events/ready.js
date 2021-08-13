@@ -11,12 +11,15 @@ module.exports = {
         console.log("👉", 'Discord bot is Ready!');
 
         /*Birthday announcer*/
-        cron.schedule('0 0 * * *', () => {
-            console.log('Running a job at 00:00 at Europe/Amsterdam timezone');
+        cron.schedule('0 9 * * *', () => {
+            console.log('Running a job at 09:00 at Europe/Amsterdam timezone');
             googleService.checkBirthdays(discordClient)
         }, {
             scheduled: true,
             timezone: "Europe/Amsterdam"
         });
+
+        /*notionService.getNewMemberMessage()*/
+        /*notionService.getWelcomeMessage()*/
     },
 };
