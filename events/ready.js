@@ -2,7 +2,6 @@ const cron = require('node-cron')
 
 /*import services*/
 const googleService = require('../services/google')
-const notionService = require('../services/notion')
 
 module.exports = {
     name: 'ready',
@@ -19,7 +18,5 @@ module.exports = {
             timezone: "Europe/Amsterdam"
         });
 
-        /*notionService.getNewMemberMessage()*/
-        /*notionService.getWelcomeMessage()*/
     },
 };

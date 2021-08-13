@@ -10,14 +10,13 @@ module.exports = {
             const guild = message.member.guild
             const memberRole = await guild.roles.cache.find(role => role.name === 'Lid')
             const newMemberRole = await guild.roles.cache.find(role => role.name === 'Nieuw lid')
-            const socialRole = await guild.roles.cache.find(role => role.name === 'Social')
             const privateMsg = notionService.getNewMemberMessage()
 
             /*Adding 'lid'/'nieuw lid' roles to and removing 'Social' role from the user*/
             message.mentions.members.forEach(member => {
-                member.roles.add(memberRole).catch(e => console.error(e));
-                member.roles.add(newMemberRole).catch(e => console.error(e));
-                member.roles.remove(socialRole).catch(e => console.error(e));
+                member.roles.remove(member.roles.cache).catch(e => console.error(e))
+                member.roles.add(memberRole).catch(e => console.error(e))
+                member.roles.add(newMemberRole).catch(e => console.error(e))
             });
 
             /*Creating a new loop over the arguments because you cant have an async function in a foreach*/
@@ -38,12 +37,12 @@ module.exports = {
                     await message.react('👋')
 
                 } else {
-                    await message.channel.send(`${args[i]} is geen user in deze discord :(`);
+                    await message.channel.send(`${args[i]} is geen user in deze discord :(`)
                 }
             }
         } else {
             await message.channel.send('Enkel admins of mensen uit de raad van bestuur kunnen dit commando uitvoeren (:');
         }
-        await message.delete().catch(console.error)
+        await message.delete().catch(e => console.error(e))
     },
 };
