@@ -61,7 +61,7 @@ discordClient.on('messageCreate', async message => {
         case 'discord':
             discordClient.commands.get('discord').execute(message)
             break
-        case 'wesbite':
+        case 'website':
             discordClient.commands.get('website').execute(message)
             break
         case 'bible':
