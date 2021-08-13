@@ -61,6 +61,9 @@ discordClient.on('messageCreate', async message => {
         case 'discord':
             discordClient.commands.get('discord').execute(message)
             break
+        case 'wesbite':
+            discordClient.commands.get('website').execute(message)
+            break
         case 'bible':
             discordClient.commands.get('bible').execute(message)
             break
@@ -69,6 +72,9 @@ discordClient.on('messageCreate', async message => {
             break
         case 'custom-poll':
             discordClient.commands.get('custom-poll').execute(message)
+            break
+        case 'new-member':
+            discordClient.commands.get('new-member').execute(message, args, discordClient)
             break
         /*case 'check-birthdays':
             discordClient.commands.get('check-birthdays').execute(discordClient)

@@ -4,6 +4,7 @@ Created a bot for some automation in our discord server!
 ## Features
 👉 Commands to link to certain files or websites <br>
 👉 Birthday announces with data pulled from a google sheets file <br>
+👉 Sending messages pulled from Notion with the notion API <br>
 👉 Adding a role to people who join the server <br>
 👉 Creating polls
 
