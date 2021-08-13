@@ -13,24 +13,36 @@ Created a bot for some automation in our discord server!
 💻 `?discord` : Gives you a link to our discord server <br>
 💻 `?facebook` : Gives you a link to our facebook page <br>
 💻 `?instagram` : Gives you a link to our Instagram page <br>
+💻 `?website` : Gives you a link to our website
 
 #### Polls
-💻 `?poll [question]` : Creates a simple  👍 - 👎 poll <br>
-💻 `?custom-poll "[question]" "[option 1]" "[option 2]" "[option 3]"` : Creates a custom poll up to 9 options <br>
+📋 `?poll [question]` : Creates a simple  👍 - 👎 poll <br>
+📋 `?custom-poll "[question]" "[option 1]" "[option 2]" "[option 3]"` : Creates a custom poll up to 9 options <br>
+
+#### Admin
+👋️ `?new-member [user] [user]` : Creates an new member in out discord (role updates + private msg + announcement member channel)
 
 #### Other
-💻 `?bible` : Gives you a link to our rules
+📖 `?bible` : Gives you a link to our rules
 
 ## Get up and running
 Create an .env file with following values:
 ```
 #Discord bot ID
 TOKEN=[DISCORD_BOT_TOKEN]
+
 #Google spreatsheet ID
 MEMBERLIST_SPREADSHEET_ID=[GOOGLE_SPREATSHEET_ID]
+
 #Google keys
 GOOGLE_API_CLIENT_EMAIL=[GOOGLE_API_CLIENT_EMAIL]
 GOOGLE_API_PRIVATE_KEY=[GOOGLE_API_PRIVATE_KEY]
+
+#Notion
+NOTION_API_KEY=[NOTION_API_KEY]
+NOTION_DB_ID=[NOTION_DATABASE_ID]
+NOTION_KEY_ID=[NOTION_KEY_ID]
+NOTION_VALUE_UD=[NOTION_VALUE_ID]
 ```
 
 Use `npm run dev` to run the bot on your local machine

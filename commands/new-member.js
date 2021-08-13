@@ -43,5 +43,6 @@ module.exports = {
         } else {
             await message.channel.send('Enkel admins of mensen uit de raad van bestuur kunnen dit commando uitvoeren (:');
         }
+        await message.delete().catch(console.error)
     },
 };
