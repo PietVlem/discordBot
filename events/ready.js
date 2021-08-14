@@ -17,6 +17,5 @@ module.exports = {
             scheduled: true,
             timezone: "Europe/Amsterdam"
         });
-
     },
 };

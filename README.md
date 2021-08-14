@@ -21,6 +21,7 @@ Created a bot for some automation in our discord server!
 
 #### Admin
 👋️ `?new-member [user] [user]` : Creates an new member in out discord (role updates + private msg + announcement member channel) <br>
+👋️ `?new-board-member [user] [user]` : Removes all roles from a user and adds 'Bestuurslid'-rol to them <br>
 ️👋️ `?remove-member [user] [user]` : Removes all roles from a user and adds 'Oud lid'-role to them
 
 #### Other

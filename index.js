@@ -76,6 +76,9 @@ discordClient.on('messageCreate', async message => {
         case 'new-member':
             discordClient.commands.get('new-member').execute(message, args, discordClient)
             break
+        case 'new-board-member':
+            discordClient.commands.get('new-board-member').execute(message, args)
+            break
         case 'remove-member':
             discordClient.commands.get('remove-member').execute(message, args)
             break
