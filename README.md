@@ -20,7 +20,7 @@ Created a bot for some automation in our discord server!
 📋 `?custom-poll "[question]" "[option 1]" "[option 2]" "[option 3]"` : Creates a custom poll up to 9 options <br>
 
 #### Admin
-👋️ `?new-member [user] [user]` : Creates an new member in out discord (role updates + private msg + announcement member channel) <br>
+👋️ `?new-member [user] [user]` : Creates an new member in our discord (role updates + private msg + announcement member channel) <br>
 👋️ `?new-board-member [user] [user]` : Removes all roles from a user and adds 'Bestuurslid'-rol to them <br>
 ️👋️ `?remove-member [user] [user]` : Removes all roles from a user and adds 'Oud lid'-role to them
 
@@ -50,4 +50,4 @@ NOTION_VALUE_UD=[NOTION_VALUE_ID]
 Use `npm run dev` to run the bot on your local machine
 
 ## Hosting
-This bot is hosted on heroku. This repo is synced and wil automaticly deploy when a new version is pushed to this repo.
+This bot is hosted on heroku. This repo is synced and wil automaticly deploy when a new version is pushed to the main branch.
