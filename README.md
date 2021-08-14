@@ -3,6 +3,7 @@ Created a bot for some automation in our discord server!
 
 ## Features
 👉 Commands to link to certain files or websites <br>
+👉 Commands to add and remove certain roles for users (in bulk)<br>
 👉 Birthday announces with data pulled from a google sheets file <br>
 👉 Sending messages pulled from Notion with the notion API <br>
 👉 Adding a role to people who join the server <br>
@@ -34,12 +35,10 @@ Create an .env file with following values:
 #Discord bot ID
 TOKEN=[DISCORD_BOT_TOKEN]
 
-#Google spreatsheet ID
-MEMBERLIST_SPREADSHEET_ID=[GOOGLE_SPREATSHEET_ID]
-
 #Google keys
 GOOGLE_API_CLIENT_EMAIL=[GOOGLE_API_CLIENT_EMAIL]
 GOOGLE_API_PRIVATE_KEY=[GOOGLE_API_PRIVATE_KEY]
+MEMBERLIST_SPREADSHEET_ID=[GOOGLE_SPREATSHEET_ID]
 
 #Notion
 NOTION_API_KEY=[NOTION_API_KEY]
