@@ -73,6 +73,9 @@ discordClient.on('messageCreate', async message => {
         case 'custom-poll':
             discordClient.commands.get('custom-poll').execute(message)
             break
+        case 'shifters':
+            discordClient.commands.get('shifters').execute(message)
+            break
         case 'new-member':
             discordClient.commands.get('new-member').execute(message, args, discordClient)
             break
@@ -98,7 +101,7 @@ discordClient.on('guildMemberAdd', async (guildMember) => {
     await guildMember.roles.add(role);
 
     /*Send him a message to welcome him to the community*/
-    const privateMsg = notionService.getWelcomeMessage()
+    const privateMsg = notionService.getMsgByKey("welcomeMessage")
     await guildMember.send(await privateMsg)
 });
 

@@ -10,7 +10,7 @@ module.exports = {
             const guild = message.member.guild
             const memberRole = await guild.roles.cache.find(role => role.name === 'Lid')
             const newMemberRole = await guild.roles.cache.find(role => role.name === 'Nieuw lid')
-            const privateMsg = notionService.getNewMemberMessage()
+            const privateMsg = notionService.getMsgByKey("newMemberMessage")
 
             /*Adding 'lid'/'nieuw lid' roles to and removing 'Social' role from the user*/
             message.mentions.members.forEach(member => {
