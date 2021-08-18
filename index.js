@@ -85,9 +85,9 @@ discordClient.on('messageCreate', async message => {
         case 'remove-member':
             discordClient.commands.get('remove-member').execute(message, args)
             break
-        /*case 'check-birthdays':
+        case 'check-birthdays':
             discordClient.commands.get('check-birthdays').execute(discordClient)
-            break*/
+            break
     }
 })
 
