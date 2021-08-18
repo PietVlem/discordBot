@@ -5,10 +5,7 @@ const _ = require('lodash');
 
 exports.checkBirthdays = (discordClient) => {
     console.log("👉", 'Checking birthdays...')
-
     const googleApiKey = _.replace(process.env.GOOGLE_API_PRIVATE_KEY, new RegExp("\\\\n", "\g"), "\n")
-    
-    console.log("👉", googleApiKey)
 
     const googleClient = new google.auth.JWT(
         process.env.GOOGLE_API_CLIENT_EMAIL,
@@ -25,7 +22,6 @@ exports.checkBirthdays = (discordClient) => {
     googleClient.authorize((err, tokens) => {
         if (err) {
             console.log("👉", err)
-            console.log("👉", "authorize error")
         } else {
             console.log("👉", 'Google api connected ...')
             gsrun(googleClient)
@@ -58,6 +54,7 @@ exports.checkBirthdays = (discordClient) => {
 
             /*If it's someone's birthday today, send a message in the chit-chat channel*/
             if (now === birthday) {
+                console.log("👉", `checking birthday of ${person[0]}`)
                 const message = await birthdayChannel.send(`${person[0]} is jarig vandaag! Wens hem/haar een gelukkige verjaardag! 🎂🎉`)
                 await message.react('🥳')
             }
