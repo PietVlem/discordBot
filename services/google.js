@@ -49,7 +49,6 @@ exports.checkBirthdays = (discordClient) => {
         for (const i in res.data.values) {
             const person = res.data.values[i]
             const birthday = dayjs(person[5], "MM/DD/YYYY").format("MM/DD")
-            console.log("👉", `checking birthday of ${person[0]}`)
 
             /*If it's someone's birthday today, send a message in the chit-chat channel*/
             if (now === birthday) {
