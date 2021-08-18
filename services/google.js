@@ -9,7 +9,7 @@ exports.checkBirthdays = (discordClient) => {
     const googleClient = new google.auth.JWT(
         process.env.GOOGLE_API_CLIENT_EMAIL,
         null,
-        process.env.GOOGLE_API_PRIVATE_KEY,
+        process.env.GOOGLE_API_PRIVATE_KEY.replace(new RegExp("\\\\n", "\g"), "\n"),
         [
             'https://www.googleapis.com/auth/spreadsheets.readonly'
         ]
