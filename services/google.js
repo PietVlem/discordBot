@@ -6,7 +6,7 @@ const _ = require('lodash');
 exports.checkBirthdays = (discordClient) => {
     console.log("👉", 'Checking birthdays...')
 
-    googleApiKey = _.replace(process.env.GOOGLE_API_PRIVATE_KEY, new RegExp("\\\\n", "\g"), "\n")
+    const googleApiKey = _.replace(process.env.GOOGLE_API_PRIVATE_KEY, new RegExp("\\\\n", "\g"), "\n")
 
 
     /*Create new google instance*/
