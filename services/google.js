@@ -15,8 +15,6 @@ exports.checkBirthdays = (discordClient) => {
             'https://www.googleapis.com/auth/spreadsheets.readonly'
         ]
     )
-    
-    console.log("👉", googleClient)
 
     /*Authenticate with the google api*/
     googleClient.authorize((err, tokens) => {
@@ -51,10 +49,10 @@ exports.checkBirthdays = (discordClient) => {
         for (const i in res.data.values) {
             const person = res.data.values[i]
             const birthday = dayjs(person[5], "MM/DD/YYYY").format("MM/DD")
+            console.log("👉", `checking birthday of ${person[0]}`)
 
             /*If it's someone's birthday today, send a message in the chit-chat channel*/
             if (now === birthday) {
-                console.log("👉", `checking birthday of ${person[0]}`)
                 const message = await birthdayChannel.send(`${person[0]} is jarig vandaag! Wens hem/haar een gelukkige verjaardag! 🎂🎉`)
                 await message.react('🥳')
             }
