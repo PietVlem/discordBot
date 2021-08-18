@@ -7,9 +7,9 @@ exports.checkBirthdays = (discordClient) => {
     console.log("👉", 'Checking birthdays...')
 
     const googleApiKey = _.replace(process.env.GOOGLE_API_PRIVATE_KEY, new RegExp("\\\\n", "\g"), "\n")
+    
+    console.log("👉", googleApiKey)
 
-
-    /*Create new google instance*/
     const googleClient = new google.auth.JWT(
         process.env.GOOGLE_API_CLIENT_EMAIL,
         null,
@@ -18,11 +18,14 @@ exports.checkBirthdays = (discordClient) => {
             'https://www.googleapis.com/auth/spreadsheets.readonly'
         ]
     )
+    
+    console.log("👉", googleClient)
 
     /*Authenticate with the google api*/
     googleClient.authorize((err, tokens) => {
         if (err) {
             console.log("👉", err)
+            console.log("👉", "authorize error")
         } else {
             console.log("👉", 'Google api connected ...')
             gsrun(googleClient)
