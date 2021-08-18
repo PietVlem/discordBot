@@ -1,15 +1,19 @@
 require('dotenv').config()
 const {google} = require('googleapis')
 const dayjs = require('dayjs')
+const _ = require('lodash');
 
 exports.checkBirthdays = (discordClient) => {
     console.log("👉", 'Checking birthdays...')
+
+    googleApiKey = _.replace(process.env.GOOGLE_API_PRIVATE_KEY, new RegExp("\\\\n", "\g"), "\n")
+
 
     /*Create new google instance*/
     const googleClient = new google.auth.JWT(
         process.env.GOOGLE_API_CLIENT_EMAIL,
         null,
-        process.env.GOOGLE_API_PRIVATE_KEY.replace(new RegExp("\\\\n", "\g"), "\n"),
+        googleApiKey,
         [
             'https://www.googleapis.com/auth/spreadsheets.readonly'
         ]
