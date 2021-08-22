@@ -12,11 +12,15 @@ module.exports = {
             const newMemberRole = await guild.roles.cache.find(role => role.name === 'Nieuw lid')
             const privateMsg = notionService.getMsgByKey("newMemberMessage")
 
+            const editMemberRoles = async (member) => {
+                await member.roles.remove(member.roles.cache).catch(e => console.error(e))
+                await member.roles.add(memberRole).catch(e => console.error(e))
+                await member.roles.add(newMemberRole).catch(e => console.error(e))
+            }
+
             /*Adding 'lid'/'nieuw lid' roles to and removing 'Social' role from the user*/
             message.mentions.members.forEach(member => {
-                member.roles.remove(member.roles.cache).catch(e => console.error(e))
-                member.roles.add(memberRole).catch(e => console.error(e))
-                member.roles.add(newMemberRole).catch(e => console.error(e))
+                editMemberRoles(member);
             });
 
             /*Creating a new loop over the arguments because you cant have an async function in a foreach*/
