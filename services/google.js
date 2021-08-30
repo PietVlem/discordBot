@@ -35,7 +35,7 @@ exports.checkBirthdays = (discordClient) => {
 
         const options = {
             spreadsheetId: process.env.MEMBERLIST_SPREADSHEET_ID,
-            range: 'A4:h63'
+            range: 'A4:h71'
         }
 
         /*Save the response into a var*/
