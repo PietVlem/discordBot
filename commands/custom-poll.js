@@ -5,8 +5,9 @@ module.exports = {
     description: 'Maak een custom poll.',
     async execute(message) {
         let array = []
+        /*Split the string into an combined array (Question + answer)*/
         array = message.content.split(' "')
-        console.log("👉", array)
+        /*By checking if there are 2 values in the array, you check if there is a question and at least 1 answer*/
         if(array.length > 1) {
             const question = array[1].replace('"','')
             const pollValues = []
@@ -16,22 +17,32 @@ module.exports = {
                 pollValues.push(array[i].replace('"',''))
             }
 
-            let pollDescription = null
+            /*Array with emojis*/
             const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"]
+
+            /*Loop over the answers and add an emoji to them*/
+            let pollDescription = null
             for (let i = 0; i < pollValues.length; i++) {
                 !pollDescription ?
                     pollDescription = `${emojis[i]} \xa0 ${pollValues[i]}` :
                     pollDescription += `\r\n${emojis[i]} \xa0 ${pollValues[i]}`
             }
 
+            /*Create a discord-embed with a title, description (possible answers) and color for the poll*/
             let embedPoll = new MessageEmbed()
                 .setTitle(`📋 ${question}️`)
                 .setDescription(pollDescription)
                 .setColor('GREEN')
+
+            /*Show the embed in the channel*/
             let msgEmbed = await message.channel.send({ embeds: [embedPoll] })
+
+            /*React with the emojis so people can vote*/
             for (let i = 0; i < pollValues.length; i++) {
                 await msgEmbed.react(emojis[i])
             }
+
+            /*Delete the command to clean up the channel*/
             await message.delete().catch(console.error)
         }
         else {
