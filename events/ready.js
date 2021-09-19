@@ -17,5 +17,14 @@ module.exports = {
             scheduled: true,
             timezone: "Europe/Amsterdam"
         });
+
+        /*Shifter announcer*/
+        cron.schedule('0 12 * * *', () => {
+            console.log('Running a job at 12:00 at Europe/Amsterdam timezone');
+            googleService.announceShifters(discordClient)
+        }, {
+            scheduled: true,
+            timezone: "Europe/Amsterdam"
+        });
     },
 };

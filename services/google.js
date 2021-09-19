@@ -3,31 +3,32 @@ const {google} = require('googleapis')
 const dayjs = require('dayjs')
 const _ = require('lodash');
 
+const googleApiKey = _.replace(process.env.GOOGLE_API_PRIVATE_KEY, new RegExp("\\\\n", "\g"), "\n")
+
+const googleClient = new google.auth.JWT(
+    process.env.GOOGLE_API_CLIENT_EMAIL,
+    null,
+    googleApiKey,
+    [
+        'https://www.googleapis.com/auth/spreadsheets.readonly'
+    ]
+)
+
+/*Get today's date*/
+const now = dayjs().format("MM/DD")
+
 exports.checkBirthdays = (discordClient) => {
     console.log("👉", 'Checking birthdays...')
-    const googleApiKey = _.replace(process.env.GOOGLE_API_PRIVATE_KEY, new RegExp("\\\\n", "\g"), "\n")
-
-    const googleClient = new google.auth.JWT(
-        process.env.GOOGLE_API_CLIENT_EMAIL,
-        null,
-        googleApiKey,
-        [
-            'https://www.googleapis.com/auth/spreadsheets.readonly'
-        ]
-    )
 
     /*Authenticate with the google api*/
     googleClient.authorize((err, tokens) => {
-        if (err) {
-            console.log("👉", err)
-        } else {
-            console.log("👉", 'Google api connected ...')
-            gsrun(googleClient)
-        }
+        err ? console.log("👉", err) : gsrun(googleClient)
     })
 
     /*Get data from the api*/
     async function gsrun(client) {
+        console.log("👉", 'Google api connected ...')
+
         const gsapi = google.sheets({
             version: 'v4',
             auth: client
@@ -40,8 +41,6 @@ exports.checkBirthdays = (discordClient) => {
 
         /*Save the response into a var*/
         let res = await gsapi.spreadsheets.values.get(options)
-        /*Get today's date*/
-        const now = dayjs().format("MM/DD")
         /*Get the channel for the announcement*/
         const birthdayChannel = await discordClient.channels.cache.find(i => i.name === 'chit-chat')
 
@@ -54,6 +53,59 @@ exports.checkBirthdays = (discordClient) => {
             if (now === birthday) {
                 const message = await birthdayChannel.send(`${person[0]} is jarig vandaag! Wens hem/haar een gelukkige verjaardag! 🎂🎉`)
                 await message.react('🥳')
+            }
+        }
+    }
+}
+
+exports.announceShifters = (discordClient) => {
+    console.log("👉", 'Checking for shifters...')
+
+    /*Authenticate with the google api*/
+    googleClient.authorize((err, tokens) => {
+        err ? console.log("👉", err) : gsrun(googleClient)
+    })
+
+    /*Get data from the api*/
+    async function gsrun(client) {
+        console.log("👉", 'Google api connected ...')
+
+        const gsapi = google.sheets({
+            version: 'v4',
+            auth: client
+        })
+
+        const options = {
+            spreadsheetId: process.env.SHIFTERSLIST_SPREADSHEETS_ID,
+            range: 'b5:m18'
+        }
+
+        /*Save the response into a var*/
+        let res = await gsapi.spreadsheets.values.get(options)
+
+        for (const i in res.data.values) {
+            const row = res.data.values[i]
+            if (row[0] === dayjs().format("DD/MM")){
+                /*Create arrays to group shifters*/
+                let afterSchool = []
+                let first = row.slice(6,9).filter(n => n)
+                let second = row.slice(9,12).filter(n => n)
+
+                /*Get shifters channel*/
+                const shiftersChannel = await discordClient.channels.cache.find(i => i.name === 'shifters')
+
+                /*Send messag in channel*/
+                let msg = `@everyone \r\n **Shifters voor vandaag: ** \r\n\r\n`
+                if (row[1]) msg +=`**Evenement:** ${row[1]} \r\n`
+
+                if (dayjs().format('dddd') === 'Friday') {
+                    afterSchool = row.slice(3,6).filter(n => n)
+                    msg += `**After school shift:** ${afterSchool.join(', ')} \r\n`
+                }
+
+                msg += `**Eerste shift:** ${first.join(', ')} \r\n`
+                msg += `**Tweede shift:** ${second.join(', ')}`
+                shiftersChannel.send(msg)
             }
         }
     }

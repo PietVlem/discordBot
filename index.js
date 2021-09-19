@@ -88,6 +88,9 @@ discordClient.on('messageCreate', async message => {
         case 'check-birthdays':
             discordClient.commands.get('check-birthdays').execute(discordClient)
             break
+        case 'check-shifters':
+            discordClient.commands.get('check-shifters').execute(discordClient)
+            break
     }
 })
 
