@@ -9,6 +9,7 @@ module.exports = {
     once: true,
     execute(discordClient) {
         console.log("👉", 'Discord bot is Ready!');
+        console.log("👉", `Today is ${dayjs().format("MM/DD")}`)
 
         /*Birthday announcer*/
         cron.schedule('0 9 * * *', () => {
