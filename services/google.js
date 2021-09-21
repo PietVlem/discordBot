@@ -44,6 +44,8 @@ exports.checkBirthdays = (discordClient) => {
         /*Get the channel for the announcement*/
         const birthdayChannel = await discordClient.channels.cache.find(i => i.name === 'chit-chat')
 
+        console.log("👉", `Checking if there are any birthdays today (${now}) ...`)
+
         /*Loop through the data and check if its anyone's birthday today*/
         for (const i in res.data.values) {
             const person = res.data.values[i]
@@ -94,7 +96,7 @@ exports.announceShifters = (discordClient) => {
                 /*Get shifters channel*/
                 const shiftersChannel = await discordClient.channels.cache.find(i => i.name === 'shifters')
 
-                /*Send messag in channel*/
+                /*Create and send message in channel*/
                 let msg = `@everyone \r\n **Shifters voor vandaag: ** \r\n\r\n`
                 if (row[1]) msg +=`**Evenement:** ${row[1]} \r\n`
 
