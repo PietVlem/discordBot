@@ -1,7 +1,13 @@
 require('dotenv').config()
 const {google} = require('googleapis')
-const dayjs = require('dayjs')
 const _ = require('lodash');
+const dayjs = require('dayjs')
+const utc = require('dayjs/plugin/utc')
+const timezone = require('dayjs/plugin/timezone')
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
 
 const googleApiKey = _.replace(process.env.GOOGLE_API_PRIVATE_KEY, new RegExp("\\\\n", "\g"), "\n")
 
@@ -15,7 +21,7 @@ const googleClient = new google.auth.JWT(
 )
 
 /*Get today's date*/
-const now = dayjs().format("MM/DD")
+const now = dayjs().tz("Europe/Brussels").format("MM/DD")
 
 exports.checkBirthdays = (discordClient) => {
     console.log("👉", 'Checking birthdays...')
@@ -43,8 +49,6 @@ exports.checkBirthdays = (discordClient) => {
         let res = await gsapi.spreadsheets.values.get(options)
         /*Get the channel for the announcement*/
         const birthdayChannel = await discordClient.channels.cache.find(i => i.name === 'chit-chat')
-
-        console.log("👉", `Checking if there are any birthdays today (${now}) ...`)
 
         /*Loop through the data and check if its anyone's birthday today*/
         for (const i in res.data.values) {
@@ -87,7 +91,7 @@ exports.announceShifters = (discordClient) => {
 
         for (const i in res.data.values) {
             const row = res.data.values[i]
-            if (row[0] === dayjs().format("DD/MM")){
+            if (row[0] === dayjs().tz("Europe/Brussels").format("DD/MM")){
                 /*Create arrays to group shifters*/
                 let afterSchool = []
                 let first = row.slice(6,9).filter(n => n)
@@ -100,7 +104,7 @@ exports.announceShifters = (discordClient) => {
                 let msg = `@everyone \r\n **Shifters voor vandaag: ** \r\n\r\n`
                 if (row[1]) msg +=`**Evenement:** ${row[1]} \r\n`
 
-                if (dayjs().format('dddd') === 'Friday') {
+                if (dayjs().tz("Europe/Brussels").format('dddd') === 'Friday') {
                     afterSchool = row.slice(3,6).filter(n => n)
                     msg += `**After school shift:** ${afterSchool.join(', ')} \r\n`
                 }
