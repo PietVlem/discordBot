@@ -67,9 +67,6 @@ exports.checkBirthdays = (discordClient) => {
 exports.announceShifters = (discordClient) => {
     console.log("👉", 'Checking for shifters...')
 
-    /*Get today's date*/
-    const now = dayjs().tz("Europe/Brussels").format("MM/DD")
-
     /*Authenticate with the google api*/
     googleClient.authorize((err, tokens) => {
         err ? console.log("👉", err) : gsrun(googleClient)
