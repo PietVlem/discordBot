@@ -20,11 +20,11 @@ const googleClient = new google.auth.JWT(
     ]
 )
 
-/*Get today's date*/
-const now = dayjs().tz("Europe/Brussels").format("MM/DD")
-
 exports.checkBirthdays = (discordClient) => {
     console.log("👉", 'Checking birthdays...')
+
+    /*Get today's date*/
+    const now = dayjs().tz("Europe/Brussels").format("MM/DD")
 
     /*Authenticate with the google api*/
     googleClient.authorize((err, tokens) => {
@@ -66,6 +66,9 @@ exports.checkBirthdays = (discordClient) => {
 
 exports.announceShifters = (discordClient) => {
     console.log("👉", 'Checking for shifters...')
+
+    /*Get today's date*/
+    const now = dayjs().tz("Europe/Brussels").format("MM/DD")
 
     /*Authenticate with the google api*/
     googleClient.authorize((err, tokens) => {
