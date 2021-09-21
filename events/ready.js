@@ -1,8 +1,14 @@
 const cron = require('node-cron')
 const dayjs = require('dayjs')
+const utc = require('dayjs/plugin/utc')
+const timezone = require('dayjs/plugin/timezone')
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 /*import services*/
 const googleService = require('../services/google')
+
+dayjs.tz.setDefault("Europe/Amsterdam")
 
 module.exports = {
     name: 'ready',
