@@ -5,6 +5,7 @@ Created a bot for some automation in our discord server!
 👉 Commands to link to certain files or websites <br>
 👉 Commands to add and remove certain roles for users (in bulk)<br>
 👉 Birthday announces with data pulled from a google sheets file <br>
+👉 Announces the volunteers that will be standing behind the bar <br>
 👉 Sending messages pulled from Notion with the notion API <br>
 👉 Adding a role to people who join the server <br>
 👉 Creating polls
@@ -23,7 +24,9 @@ Created a bot for some automation in our discord server!
 #### Admin
 👋️ `?new-member [user] [user]` : Creates a new member in our discord (role updates + private msg + announcement member channel) <br>
 👋️ `?new-board-member [user] [user]` : Removes all roles from a user and adds 'Bestuurslid'-rol to them <br>
-️👋️ `?remove-member [user] [user]` : Removes all roles from a user and adds 'Oud lid'-role to them
+️👋️ `?remove-member [user] [user]` : Removes all roles from a user and adds 'Oud lid'-role to them <br>
+👋️ `?check-birthdays` : Forces the bot to check if there are any birthdays today (is also a cron job at 9:00 every day) <br>
+👋️ `?check-shifters` : Forces the bot to check for the shifters today (is also a cron job at 12:00 every day)
 
 #### Other
 🍻 `?shifters` : Gives you a link to our bar schedule <br>
@@ -39,6 +42,7 @@ TOKEN=[DISCORD_BOT_TOKEN]
 GOOGLE_API_CLIENT_EMAIL=[GOOGLE_API_CLIENT_EMAIL]
 GOOGLE_API_PRIVATE_KEY=[GOOGLE_API_PRIVATE_KEY]
 MEMBERLIST_SPREADSHEET_ID=[GOOGLE_SPREATSHEET_ID]
+SHIFTERSLIST_SPREADSHEETS_ID=[GOOGLE_SPREATSHEET_ID]
 
 #Notion
 NOTION_API_KEY=[NOTION_API_KEY]
