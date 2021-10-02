@@ -91,7 +91,16 @@ exports.announceShifters = (discordClient) => {
 
         for (const i in res.data.values) {
             const row = res.data.values[i]
-            if (row[0] === dayjs().tz("Europe/Brussels").format("DD/MM")){
+            
+            /*Get todays date*/
+            let today = dayjs().tz("Europe/Brussels").format("DD/MM")
+            if (today.charAt(0) === '0') today = today.substring(1)
+
+            /*reformat date from spreadsheet*/
+            let spreadsheetDate = row[0];
+            if (spreadsheetDate.charAt(0) === '0') spreadsheetDate = spreadsheetDate.substring(1)
+
+            if (spreadsheetDate === today){
                 /*Create arrays to group shifters*/
                 let afterSchool = []
                 let first = row.slice(6,9).filter(n => n)

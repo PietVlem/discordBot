@@ -94,7 +94,7 @@ discordClient.on('messageCreate', async message => {
     }
 })
 
-/*Do stuff when someone joins the serve*/
+/*Do stuff when someone joins the server*/
 discordClient.on('guildMemberAdd', async (guildMember) => {
     console.log("👉", 'member joined the server...')
     
