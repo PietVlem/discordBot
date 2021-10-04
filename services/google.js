@@ -57,6 +57,7 @@ exports.checkBirthdays = (discordClient) => {
 
             /*If it's someone's birthday today, send a message in the chit-chat channel*/
             if (now === birthday) {
+
                 const message = await birthdayChannel.send(`${person[0]} is jarig vandaag! Wens hem/haar een gelukkige verjaardag! 🎂🎉`)
                 await message.react('🥳')
             }
@@ -83,45 +84,91 @@ exports.announceShifters = (discordClient) => {
 
         const options = {
             spreadsheetId: process.env.SHIFTERSLIST_SPREADSHEETS_ID,
-            range: 'b5:m18'
         }
 
         /*Save the response into a var*/
-        let res = await gsapi.spreadsheets.values.get(options)
+        const sheet_metadata = await gsapi.spreadsheets.get(options)
+        const sheets = sheet_metadata.data.sheets;
 
-        for (const i in res.data.values) {
-            const row = res.data.values[i]
-            
-            /*Get todays date*/
-            let today = dayjs().tz("Europe/Brussels").format("DD/MM")
-            if (today.charAt(0) === '0') today = today.substring(1)
+        /*month arrays*/
+        const monthsNl = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december']
+        const monthsEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-            /*reformat date from spreadsheet*/
-            let spreadsheetDate = row[0];
-            if (spreadsheetDate.charAt(0) === '0') spreadsheetDate = spreadsheetDate.substring(1)
+        /*Get today's date*/
+        let today = dayjs().tz("Europe/Brussels")
 
-            if (spreadsheetDate === today){
-                /*Create arrays to group shifters*/
-                let afterSchool = []
-                let first = row.slice(6,9).filter(n => n)
-                let second = row.slice(9,12).filter(n => n)
+        /*Save matching sheets*/
+        const sheetsMatches = []
 
-                /*Get shifters channel*/
-                const shiftersChannel = await discordClient.channels.cache.find(i => i.name === 'shifters')
+        for (let j = 0; j < sheets.length; j++) {
+            /*Get the title and split the word into an array*/
+            const title = sheets[j].properties.title.toLowerCase()
+            const splitTitle = title.split(" ")
 
-                /*Create and send message in channel*/
-                let msg = `@everyone \r\n **Shifters voor vandaag: ** \r\n\r\n`
-                if (row[1]) msg +=`**Evenement:** ${row[1]} \r\n`
+            /*Get the index of the month*/
+            let monthIndex = null;
+            splitTitle.forEach(word => {
+                if (monthsNl.includes(word)) monthIndex = monthsNl.indexOf(word)
+            })
 
-                if (dayjs().tz("Europe/Brussels").format('dddd') === 'Friday') {
-                    afterSchool = row.slice(3,6).filter(n => n)
-                    msg += `**After school shift:** ${afterSchool.join(', ')} \r\n`
-                }
-
-                msg += `**Eerste shift:** ${first.join(', ')} \r\n`
-                msg += `**Tweede shift:** ${second.join(', ')}`
-                shiftersChannel.send(msg)
+            /*Check current month */
+            if (monthIndex && monthsEn[monthIndex] === today.format('MMMM')) {
+                sheetsMatches.push(sheets[j])
             }
+        }
+
+        const getShifters = async (sheet) => {
+            let res = await gsapi.spreadsheets.values.get({
+                spreadsheetId: process.env.SHIFTERSLIST_SPREADSHEETS_ID,
+                range: `'${sheet.properties.title}'!b5:m18`
+            })
+
+            for (const i in res.data.values) {
+                const row = res.data.values[i]
+
+                /*Get today's date*/
+                let todayDate = today.format("DD/MM")
+                if (todayDate.charAt(0) === '0') todayDate = todayDate.substring(1)
+
+                /*reformat date from spreadsheet*/
+                let spreadsheetDate = row[0];
+                if (spreadsheetDate && spreadsheetDate.charAt(0) === '0') spreadsheetDate = spreadsheetDate.substring(1)
+
+                if (spreadsheetDate === todayDate) {
+                    /*Create arrays to group shifters*/
+                    let afterSchool = []
+                    let first = row.slice(6, 9).filter(n => n)
+                    let second = row.slice(9, 12).filter(n => n)
+
+                    /*Get shifters channel*/
+                    const shiftersChannel = await discordClient.channels.cache.find(i => i.name === 'shifters')
+
+                    /*Create and send message in channel*/
+                    let msg = `@everyone \r\n **Shifters voor vandaag: ** \r\n\r\n`
+                    if (row[1]) msg += `**Evenement:** ${row[1]} \r\n`
+
+                    if (dayjs().tz("Europe/Brussels").format('dddd') === 'Friday') {
+                        afterSchool = row.slice(3, 6).filter(n => n)
+                        msg += `**After school shift:** ${afterSchool.join(', ')} \r\n`
+                    }
+
+                    msg += `**Eerste shift:** ${first.join(', ')} \r\n`
+                    msg += `**Tweede shift:** ${second.join(', ')}`
+                    shiftersChannel.send(msg)
+                }
+            }
+        }
+
+        if (sheetsMatches.length > 1) {
+            for (const i in sheetsMatches) {
+                /*Get the title and split the word into an array*/
+                const title = sheetsMatches[i].properties.title.toLowerCase()
+                const splitTitle = title.split(" ")
+
+                if (splitTitle.includes(today.format('YYYY'))) await getShifters(sheetsMatches[i])
+            }
+        } else {
+            await getShifters(sheetsMatches[0])
         }
     }
 }
