@@ -53,12 +53,12 @@ exports.checkBirthdays = (discordClient) => {
         /*Loop through the data and check if its anyone's birthday today*/
         for (const i in res.data.values) {
             const person = res.data.values[i]
+            const genderRef = person[6].toLowerCase() === 'man' ? 'hem' : 'haar'
             const birthday = dayjs(person[5], "MM/DD/YYYY").format("MM/DD")
 
             /*If it's someone's birthday today, send a message in the chit-chat channel*/
             if (now === birthday) {
-
-                const message = await birthdayChannel.send(`${person[0]} is jarig vandaag! Wens hem/haar een gelukkige verjaardag! 🎂🎉`)
+                const message = await birthdayChannel.send(`${person[0]} is jarig vandaag! Wens ${genderRef} een gelukkige verjaardag! 🎂🎉`)
                 await message.react('🥳')
             }
         }
@@ -130,7 +130,7 @@ exports.announceShifters = (discordClient) => {
                 let todayDate = today.format("DD/MM")
                 if (todayDate.charAt(0) === '0') todayDate = todayDate.substring(1)
 
-                /*reformat date from spreadsheet*/
+                /*reformat date from spreadsheet (remove '0' at the beginning if there is one)*/
                 let spreadsheetDate = row[0];
                 if (spreadsheetDate && spreadsheetDate.charAt(0) === '0') spreadsheetDate = spreadsheetDate.substring(1)
 
