@@ -123,6 +123,23 @@ exports.announceShifters = (discordClient) => {
                 range: `'${sheet.properties.title}'!b5:m18`
             })
 
+            let shiftersSheet = await gsapi.spreadsheets.values.get({
+                spreadsheetId: process.env.SHIFTERSLIST_SPREADSHEETS_ID,
+                range: `'Shifters'!a2:d80`
+            })
+
+            const getUserByDiscordTag = async (name) => {
+                let user = null
+                for (const k in shiftersSheet.data.values) {
+                    const shifter = shiftersSheet.data.values[k]
+                    if (shifter[0] === name) {
+                        if (shifter[3]) user = discordClient.users.cache.find(user => user.tag === shifter[3])
+                        break
+                    }
+                }
+                return user ? user : name;
+            }
+
             for (const i in res.data.values) {
                 const row = res.data.values[i]
 
@@ -137,23 +154,40 @@ exports.announceShifters = (discordClient) => {
                 if (spreadsheetDate === todayDate) {
                     /*Create arrays to group shifters*/
                     let afterSchool = []
+
                     let first = row.slice(6, 9).filter(n => n)
+                    let firstDCTags = []
+                    for (const i in first) {
+                        let user = await getUserByDiscordTag(first[i])
+                        firstDCTags.push(user)
+                    }
+
                     let second = row.slice(9, 12).filter(n => n)
+                    let secondDCTags = []
+                    for (const i in second) {
+                        let user = await getUserByDiscordTag(second[i])
+                        secondDCTags.push(user)
+                    }
 
                     /*Get shifters channel*/
-                    const shiftersChannel = await discordClient.channels.cache.find(i => i.name === 'shifters')
+                    const shiftersChannel = await discordClient.channels.cache.find(i => i.name === 'test')
 
                     /*Create and send message in channel*/
-                    let msg = `@everyone \r\n **Shifters voor vandaag: ** \r\n\r\n`
+                    let msg = `**Shifters voor vandaag: ** \r\n\r\n`
                     if (row[1]) msg += `**Evenement:** ${row[1]} \r\n`
 
                     if (dayjs().tz("Europe/Brussels").format('dddd') === 'Friday') {
                         afterSchool = row.slice(3, 6).filter(n => n)
-                        msg += `**After school shift:** ${afterSchool.join(', ')} \r\n`
+                        let afterSchoolDCTags = []
+                        for (const i in afterSchool) {
+                            let user = await getUserByDiscordTag(afterSchool[i])
+                            afterSchoolDCTags.push(user)
+                        }
+                        msg += `**After school shift:** ${afterSchoolDCTags.join(', ')} \r\n`
                     }
 
-                    msg += `**Eerste shift:** ${first.join(', ')} \r\n`
-                    msg += `**Tweede shift:** ${second.join(', ')}`
+                    msg += `**Eerste shift:** ${firstDCTags.join(', ')} \r\n`
+                    msg += `**Tweede shift:** ${secondDCTags.join(', ')}`
                     shiftersChannel.send(msg)
                 }
             }
