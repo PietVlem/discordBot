@@ -60,9 +60,9 @@ exports.loadCommands = (discordClient) => {
             case 'check-shifters':
                 discordClient.commands.get('check-shifters').execute(message, discordClient)
                 break
-            case 'test':
+            /*case 'test':
                 discordClient.commands.get('test').execute(message, discordClient)
-                break
+                break*/
         }
     })
 }
