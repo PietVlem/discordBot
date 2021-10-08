@@ -8,7 +8,7 @@ const {Client, Intents} = require('discord.js')
 const events = require('./src/utils/loadEvents')
 const commands = require('./src/utils/loadCommands')
 
-/*Create discord cleint instance*/
+/*Create discord-client instance*/
 const discordClient = new Client({
     intents: [
         Intents.FLAGS.GUILDS,
