@@ -65,8 +65,9 @@ exports.checkBirthdays = (discordClient) => {
     }
 }
 
-exports.announceShifters = (discordClient) => {
+exports.announceShifters = async(discordClient) => {
     console.log("👉", 'Checking for shifters...')
+    /*console.log("👉", guild.members.cache)*/
 
     /*Authenticate with the google api*/
     googleClient.authorize((err, tokens) => {
@@ -130,13 +131,16 @@ exports.announceShifters = (discordClient) => {
                 range: `'Shifters'!a2:d80`
             })
 
+            const guild = discordClient.guilds.cache.get(process.env.JH_SERVER_ID);
+            await guild.members.fetch()
+
             /* Get the discord user by their discord tag */
             const getUserByDiscordTag = async (name) => {
                 let user = null
                 for (const k in shiftersSheet.data.values) {
                     const shifter = shiftersSheet.data.values[k]
                     if (shifter[0] === name) {
-                        if (shifter[3]) user = discordClient.users.cache.find(user => user.tag === shifter[3])
+                        if (shifter[3]) user = guild.members.cache.find(member => member.user.tag === shifter[3])
                         break
                     }
                 }
