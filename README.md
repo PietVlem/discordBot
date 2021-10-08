@@ -37,6 +37,7 @@ Create an .env file with following values:
 ```
 #Discord bot ID
 TOKEN=[DISCORD_BOT_TOKEN]
+JH_SERVER_ID=[JH_DISCORD_SERVER_ID]
 
 #Google keys
 GOOGLE_API_CLIENT_EMAIL=[GOOGLE_API_CLIENT_EMAIL]

@@ -11,14 +11,13 @@ const {Client, Collection, Intents} = require('discord.js')
 const notionService = require('./services/notion')
 
 /*Create discord cleint instance*/
-const discordClient = new Client(
-    {
-        intents: [
-            Intents.FLAGS.GUILDS,
-            Intents.FLAGS.GUILD_MESSAGES,
-            Intents.FLAGS.GUILD_MEMBERS
-        ]
-    })
+const discordClient = new Client({
+    intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_MEMBERS
+    ]
+})
 
 /*Discord events*/
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'))
@@ -91,13 +90,16 @@ discordClient.on('messageCreate', async message => {
         case 'check-shifters':
             discordClient.commands.get('check-shifters').execute(message, discordClient)
             break
+        /*case 'test':
+            discordClient.commands.get('test').execute(message, discordClient)
+            break*/
     }
 })
 
 /*Do stuff when someone joins the server*/
 discordClient.on('guildMemberAdd', async (guildMember) => {
     console.log("👉", 'member joined the server...')
-    
+
     /*Add role when someone joins the serve*/
     const guild = guildMember.guild;
     const role = await guild.roles.cache.find(role => role.name === 'Social')
