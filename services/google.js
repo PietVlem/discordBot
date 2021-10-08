@@ -118,16 +118,19 @@ exports.announceShifters = (discordClient) => {
         }
 
         const getShifters = async (sheet) => {
+            /* Get the shifter sheet of this month */
             let res = await gsapi.spreadsheets.values.get({
                 spreadsheetId: process.env.SHIFTERSLIST_SPREADSHEETS_ID,
                 range: `'${sheet.properties.title}'!b5:m18`
             })
 
+            /* Get the sheet with all the shifters */
             let shiftersSheet = await gsapi.spreadsheets.values.get({
                 spreadsheetId: process.env.SHIFTERSLIST_SPREADSHEETS_ID,
                 range: `'Shifters'!a2:d80`
             })
 
+            /* Get the discord user by their discord tag */
             const getUserByDiscordTag = async (name) => {
                 let user = null
                 for (const k in shiftersSheet.data.values) {
@@ -140,6 +143,7 @@ exports.announceShifters = (discordClient) => {
                 return user ? user : name;
             }
 
+            /* Loop over all the rows of this months shifters list */
             for (const i in res.data.values) {
                 const row = res.data.values[i]
 
@@ -170,7 +174,7 @@ exports.announceShifters = (discordClient) => {
                     }
 
                     /*Get shifters channel*/
-                    const shiftersChannel = await discordClient.channels.cache.find(i => i.name === 'test')
+                    const shiftersChannel = await discordClient.channels.cache.find(i => i.name === 'shifters')
 
                     /*Create and send message in channel*/
                     let msg = `**Shifters voor vandaag: ** \r\n\r\n`

@@ -33,7 +33,7 @@ module.exports = {
         });
 
         /*Shifter announcer*/
-        cron.schedule('0 12 * * *', () => {
+        cron.schedule('0 12 04 * *', () => {
             console.log("👉", 'Running a job at 12:00 at Europe/Brussels timezone');
             logDateTime()
             googleService.announceShifters(discordClient)
