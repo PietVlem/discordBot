@@ -5,12 +5,12 @@ const notionService = require('../services/notion')
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('website')
-        .setDescription('Geeft een link terug naar onze website!'),
+        .setName('shifters')
+        .setDescription('Geeft een link naar de shifterslijst!'),
     async execute(interaction) {
-        const msg = await notionService.getMsgByKey("website")
+        const msg = await notionService.getMsgByKey("shifters")
         interaction.reply({
-            content: `Website: <${msg}>`
+            content: `Shifters: <${msg}>`
         })
     }
 };
