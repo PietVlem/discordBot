@@ -4,9 +4,10 @@
 
 /*Packages*/
 require('dotenv').config()
-const {Client, Intents} = require('discord.js')
+const { Client, Intents} = require('discord.js')
 const events = require('./src/utils/loadEvents')
-const commands = require('./src/utils/loadCommands')
+/*const commands = require('./src/utils/loadCommands')*/
+/*const slashCommands = require('./src/utils/loadSlashCommands')*/
 
 /*Create discord-client instance*/
 const discordClient = new Client({
@@ -19,8 +20,10 @@ const discordClient = new Client({
 
 /*Discord events*/
 events.loadEvents(discordClient)
+
 /*Discord commands*/
-commands.loadCommands(discordClient)
+/*commands.loadCommands(discordClient)*/
+/*slashCommands.loadSlashCommands(discordClient);*/
 
 /*Login into the discordClient*/
 discordClient.login(process.env.TOKEN);
