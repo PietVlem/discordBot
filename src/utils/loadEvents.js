@@ -5,9 +5,7 @@ exports.loadEvents = (discordClient) => {
 
     for (const file of eventFiles) {
         const event = require(`../events/${file}`)
-        if (event.name === 'interactionCreate') {
-            discordClient.once(event.name, (...args) => event.execute(...args, discordClient))
-        } else if (event.once) {
+        if (event.once) {
             discordClient.once(event.name, (...args) => event.execute(...args))
         } else {
             discordClient.on(event.name, (...args) => event.execute(...args))

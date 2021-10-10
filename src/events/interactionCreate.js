@@ -1,12 +1,12 @@
 module.exports = {
     name: 'interactionCreate',
     once: true,
-    async execute(interaction, discordClient) {
+    async execute(interaction) {
         // There are multiple types of interactions
         // Make sure this is a command
         if (!interaction.isCommand()) return;
 
-        const command = discordClient.commands.get(interaction.commandName);
+        const command = interaction.client.commands.get(interaction.commandName);
         if (!command) return;
         try {
             await command.execute(interaction);

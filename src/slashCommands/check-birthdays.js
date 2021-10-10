@@ -7,9 +7,9 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('check-birthdays')
         .setDescription('Kijkt of er iemand jarig is.'),
-    async execute(interaction, discordClient) {
+    async execute(interaction) {
         if (interaction.member.roles.cache.find(r => r.name === "Admin") || interaction.member.roles.cache.find(r => r.name === "Raad van bestuur")) {
-            await birthdayBot.checkBirthdays(discordClient)
+            await birthdayBot.checkBirthdays(interaction.client)
             interaction.reply({
                 content: 'Check is done ☑️',
                 ephemeral: true

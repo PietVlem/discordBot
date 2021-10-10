@@ -7,9 +7,9 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('check-shifters')
         .setDescription('Kijkt wie er moet shiften die dag.'),
-    async execute(interaction, discordClient) {
+    async execute(interaction) {
         if (interaction.member.roles.cache.find(r => r.name === "Admin") || interaction.member.roles.cache.find(r => r.name === "Raad van bestuur")) {
-            await shifters.announceShifters(discordClient)
+            await shifters.announceShifters(interaction.client)
             interaction.reply({
                 content: 'Check is done ☑️',
                 ephemeral: true
