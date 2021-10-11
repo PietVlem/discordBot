@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/PietVlem/discordBot#readme",
   "dependencies": {
+    "@discordjs/rest": "0.1.0-canary.0",
+    "discord-api-types": "^0.23.1",
     "@discordjs/builders": "^0.6.0",
     "@notionhq/client": "^0.2.4",
     "dayjs": "^1.10.6",
@@ -32,8 +34,6 @@
     "node-cron": "^3.0.0"
   },
   "devDependencies": {
-    "@discordjs/rest": "0.1.0-canary.0",
-    "discord-api-types": "^0.23.1",
     "nodemon": "^2.0.12"
   }
 }
