@@ -21,48 +21,9 @@ exports.loadCommands = (discordClient) => {
         const command = args.shift().toLowerCase();
 
         switch (command) {
-            case 'facebook':
-                discordClient.commands.get('facebook').execute(message)
-                break
-            case 'instagram':
-                discordClient.commands.get('instagram').execute(message)
-                break
-            case 'discord':
-                discordClient.commands.get('discord').execute(message)
-                break
-            case 'website':
-                discordClient.commands.get('website').execute(message)
-                break
-            case 'bible':
-                discordClient.commands.get('bible').execute(message)
-                break
-            case 'poll':
-                discordClient.commands.get('poll').execute(message, args)
-                break
             case 'custom-poll':
                 discordClient.commands.get('custom-poll').execute(message)
                 break
-            case 'shifters':
-                discordClient.commands.get('shifters').execute(message)
-                break
-            case 'new-member':
-                discordClient.commands.get('new-member').execute(message, args, discordClient)
-                break
-            case 'new-board-member':
-                discordClient.commands.get('new-board-member').execute(message, args)
-                break
-            case 'remove-member':
-                discordClient.commands.get('remove-member').execute(message, args)
-                break
-            case 'check-birthdays':
-                discordClient.commands.get('check-birthdays').execute(message, discordClient)
-                break
-            case 'check-shifters':
-                discordClient.commands.get('check-shifters').execute(message, discordClient)
-                break
-            /*case 'test':
-                discordClient.commands.get('test').execute(message, discordClient)
-                break*/
         }
     })
 }

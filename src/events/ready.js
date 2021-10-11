@@ -10,6 +10,9 @@ dayjs.extend(timezone)
 const birthdayBot = require('../cronjobs/birthdayBot')
 const shifters = require('../cronjobs/shifters')
 
+/*Slash-commands*/
+const slashCommands = require('../utils/loadSlashCommands');
+
 /*Log current date-time*/
 const logDateTime = () => {
     console.log("👉", `Today is ${dayjs().tz("Europe/Brussels").format("MM/DD HH:mm:ss")}`)
@@ -41,5 +44,8 @@ module.exports = {
             scheduled: true,
             timezone: "Europe/Brussels"
         });
+
+        /*Load slash-commands*/
+        slashCommands.loadSlashCommands(discordClient)
     },
 };

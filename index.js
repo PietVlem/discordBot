@@ -4,7 +4,7 @@
 
 /*Packages*/
 require('dotenv').config()
-const {Client, Intents} = require('discord.js')
+const { Client, Intents} = require('discord.js')
 const events = require('./src/utils/loadEvents')
 const commands = require('./src/utils/loadCommands')
 
@@ -19,6 +19,7 @@ const discordClient = new Client({
 
 /*Discord events*/
 events.loadEvents(discordClient)
+
 /*Discord commands*/
 commands.loadCommands(discordClient)
 
