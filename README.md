@@ -12,25 +12,25 @@ Created a bot for some automation in our discord server!
 
 ### Commands
 #### Socials
-💻 `?discord` : Gives you a link to our discord server <br>
-💻 `?facebook` : Gives you a link to our facebook page <br>
-💻 `?instagram` : Gives you a link to our Instagram page <br>
-💻 `?website` : Gives you a link to our website
+💻 `/discord` : Gives you a link to our discord server <br>
+💻 `/facebook` : Gives you a link to our facebook page <br>
+💻 `/instagram` : Gives you a link to our Instagram page <br>
+💻 `/website` : Gives you a link to our website
 
 #### Polls
-📋 `?poll [question]` : Creates a simple  👍 - 👎 poll <br>
+📋 `/poll [question]` : Creates a simple  👍 - 👎 poll <br>
 📋 `?custom-poll "[question]" "[option 1]" "[option 2]" "[option 3]"` : Creates a custom poll up to 9 options <br>
 
 #### Admin
-👋️ `?new-member [user] [user]` : Creates a new member in our discord (role updates + private msg + announcement member channel) <br>
-👋️ `?new-board-member [user] [user]` : Removes all roles from a user and adds 'Bestuurslid'-rol to them <br>
-️👋️ `?remove-member [user] [user]` : Removes all roles from a user and adds 'Oud lid'-role to them <br>
-👋️ `?check-birthdays` : Forces the bot to check if there are any birthdays today (is also a cron job at 9:00 every day) <br>
-👋️ `?check-shifters` : Forces the bot to check for the shifters today (is also a cron job at 12:00 every day)
+👋️ `/new-member [user]` : Creates a new member in our discord (role updates + private msg + announcement member channel) <br>
+👋️ `/new-board-member [user]` : Removes all roles from a user and adds 'Bestuurslid'-rol to them <br>
+️👋️ `/remove-member [user]` : Removes all roles from a user and adds 'Oud lid'-role to them <br>
+👋️ `/check-birthdays` : Forces the bot to check if there are any birthdays today (is also a cron job at 9:00 every day) <br>
+👋️ `/check-shifters` : Forces the bot to check for the shifters today (is also a cron job at 12:00 every day)
 
 #### Other
-🍻 `?shifters` : Gives you a link to our bar schedule <br>
-📖 `?bible` : Gives you a link to our rules
+🍻 `/shifters` : Gives you a link to our bar schedule <br>
+📖 `/bible` : Gives you a link to our rules
 
 ## Get up and running
 Create an .env file with following values:
