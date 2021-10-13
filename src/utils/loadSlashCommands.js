@@ -10,7 +10,7 @@ exports.loadSlashCommands = (discordClient) => {
     const commandFiles = fs.readdirSync('./src/slashCommands').filter(file => file.endsWith('.js'));
 
     // Creating a collection for commands in client
-    discordClient.commands = new Collection();
+    /*discordClient.commands = new Collection();*/
 
     for (const file of commandFiles) {
         const command = require(`../slashCommands/${file}`);

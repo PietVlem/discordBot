@@ -21,7 +21,7 @@ const discordClient = new Client({
 events.loadEvents(discordClient)
 
 /*Discord commands*/
-/*commands.loadCommands(discordClient)*/
+commands.loadCommands(discordClient)
 
 /*Login into the discordClient*/
 discordClient.login(process.env.TOKEN);
