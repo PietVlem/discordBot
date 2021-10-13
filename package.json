@@ -1,5 +1,5 @@
 {
-  "name": "discordbot",
+  "name": "jeugdhuisbot",
   "version": "1.0.0",
   "description": "Automation for the 'Jeugdhuis De Muze' discord server",
   "main": "index.js",
@@ -15,7 +15,9 @@
     "type": "git",
     "url": "git+https://github.com/PietVlem/discordBot.git"
   },
-  "author": "Pieter Vleminckx",
+  "author": {
+    "name": "Pieter Vleminckx"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/PietVlem/discordBot/issues"
