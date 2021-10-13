@@ -1,4 +1,5 @@
 require('dotenv').config()
+const { Collection} = require('discord.js');
 const fs = require('fs');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
@@ -7,6 +8,9 @@ exports.loadSlashCommands = (discordClient) => {
     // Loading commands from the commands folder
     const commands = [];
     const commandFiles = fs.readdirSync('./src/slashCommands').filter(file => file.endsWith('.js'));
+
+    // Creating a collection for commands in client
+    discordClient.commands = new Collection();
 
     for (const file of commandFiles) {
         const command = require(`../slashCommands/${file}`);
