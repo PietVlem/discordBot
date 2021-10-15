@@ -56,7 +56,7 @@ exports.checkBirthdays = (discordClient) => {
         }
 
         if (now === "11/15") {
-            const text = `Vandaag is de dag dat mijn geniale maker, originele schepper van de holy bible/deze discord-sever en een van de beste voorzitters die het jeugdhuis ooit gekend heeft een levensjaar ouder word. Stuur Pieter daarom ook 🍑-pics om zijn verjaardag te vieren...Of wens hem een gelukkige verjaardag, dat is toch ook al een begin. 🎂`
+            const text = `Vandaag is de dag dat mijn geniale maker, originele schepper van de holy bible/deze discord-sever en een van de beste voorzitters die het jeugdhuis ooit gekend heeft een levensjaar ouder wordt. Stuur Pieter daarom ook 🍑-pics om zijn verjaardag te vieren...Of wens hem een gelukkige verjaardag, dat is toch ook al een begin. 🎂`
             const message = await birthdayChannel.send(text)
             await message.react('🥳')
         }
