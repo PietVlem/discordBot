@@ -34,6 +34,9 @@ exports.announceShifters = async(discordClient) => {
             spreadsheetId: process.env.SHIFTERSLIST_SPREADSHEETS_ID,
         }
 
+        /*Get shifters channel*/
+        const shiftersChannel = await discordClient.channels.cache.find(i => i.name === 'shifters')
+
         /*Save the response into a var*/
         const sheet_metadata = await gsapi.spreadsheets.get(options)
         const sheets = sheet_metadata.data.sheets;
@@ -126,9 +129,6 @@ exports.announceShifters = async(discordClient) => {
                         secondDCTags.push(user)
                     }
 
-                    /*Get shifters channel*/
-                    const shiftersChannel = await discordClient.channels.cache.find(i => i.name === 'shifters')
-
                     /*Create and send message in channel*/
                     let msg = `**Shifters voor vandaag: ** \r\n\r\n`
                     if (row[1]) msg += `**Evenement:** ${row[1]} \r\n`
@@ -158,8 +158,10 @@ exports.announceShifters = async(discordClient) => {
 
                 if (splitTitle.includes(today.format('YYYY'))) await getShifters(sheetsMatches[i])
             }
-        } else {
+        } else if (sheetsMatches.length === 1) {
             await getShifters(sheetsMatches[0])
+        } else {
+            shiftersChannel.send(`Ik zou jullie graag vertellen wie er moet shiften vandaag, maar ik kan geen lijst vinden voor deze maand 😕.`)
         }
     }
 }
