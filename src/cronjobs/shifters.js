@@ -161,7 +161,7 @@ exports.announceShifters = async(discordClient) => {
         } else if (sheetsMatches.length === 1) {
             await getShifters(sheetsMatches[0])
         } else {
-            shiftersChannel.send(`Ik zou jullie graag vertellen wie er moet shiften vandaag, maar ik kan geen lijst vinden voor deze maand 😕.`)
+            /*shiftersChannel.send(`Ik zou jullie graag vertellen wie er moet shiften vandaag, maar ik kan geen lijst vinden voor deze maand 😕.`)*/
         }
     }
 }
