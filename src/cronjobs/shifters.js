@@ -158,10 +158,8 @@ exports.announceShifters = async(discordClient) => {
 
                 if (splitTitle.includes(today.format('YYYY'))) await getShifters(sheetsMatches[i])
             }
-        } else if (sheetsMatches.length === 1) {
-            await getShifters(sheetsMatches[0])
         } else {
-            shiftersChannel.send(`Ik kan geen shifterlijst vinden voor deze maand 😕. Shifterslijsten moeten de naam: "maand jaar" hebben (bvb: "November 2021").`)
+            await getShifters(sheetsMatches[0])
         }
     }
 }
